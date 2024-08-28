@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/db-container/db-container.iml" filepath="$PROJECT_DIR$/db-container/db-container.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jenkins-api-connector/jenkins-api-connector.iml" filepath="$PROJECT_DIR$/jenkins-api-connector/jenkins-api-connector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/report-generator/report-generator.iml" filepath="$PROJECT_DIR$/report-generator/report-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-report-tool.iml" filepath="$PROJECT_DIR$/test-report-tool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-interaction/user-interaction.iml" filepath="$PROJECT_DIR$/user-interaction/user-interaction.iml" />
+    </modules>
+  </component>
+</project>

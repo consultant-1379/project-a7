@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Test Report Tool</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+<div class="w3-panel w3-pale-green">
+    Click a button to see highest fail rates for that sector
+    <form action="http://localhost:8080/highestFail/ENM">
+        <input type="submit" value="ENM"/>
+    </form>
+
+
+    <br/>
+
+    <form action="http://localhost:8080/highestFail/CNA">
+        <input type="submit" value="CNA"/>
+    </form>
+
+    <br/>
+
+    <form action="http://localhost:8080/highestFail/PRODUCT">
+        <input type="submit" value="Product"/>
+    </form>
+</div>
+<div class="w3-panel w3-pale-red">
+    Click a button to see pass fail rates for that sector
+    <form action="http://localhost:8080/passfailrate/ENM">
+        <input type="submit" value="ENM"/>
+    </form>
+
+    <br/>
+    <form action="http://localhost:8080/passfailrate/CNA">
+        <input type="submit" value="CNA"/>
+    </form>
+
+    <br/>
+    <form action="http://localhost:8080/passfailrate/PRODUCT">
+        <input type="submit" value="Product"/>
+    </form>
+</div>
+<div class="w3-panel w3-pale-blue">
+    Click a button to see number of tests run for that sector
+
+    <form action="http://localhost:8080/numberoftestsrun/ENM">
+        <label for="enm">Period of Days:</label>
+        <input id="enm" name="days" placeholder="1" required="required" style="width:50px" type="number"/>
+        <input type="submit" value="ENM"/>
+    </form>
+
+    <br/>
+    <form action="http://localhost:8080/numberoftestsrun/CNA">
+        <label for="cna">Period of Days:</label>
+        <input id="cna" name="days" placeholder="1" required="required" style="width:50px" type="number"/>
+        <input type="submit" value="CNA"/>
+    </form>
+
+    <br/>
+    <form action="http://localhost:8080/numberoftestsrun/PRODUCT">
+        <label for="product">Period of Days:</label>
+        <input id="product" name="days" placeholder="1" required="required" style="width:50px" type="number"/>
+        <input type="submit" value="Product"/>
+    </form>
+
+</div>
+</body>
+</html>

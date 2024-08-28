@@ -1,0 +1,54 @@
+## Docker Compose File for Test Report Tool Docker Environment ##
+version: '3'
+
+services:
+    repo-db:
+        container_name: docker-db
+        build:
+            context: db-container
+            dockerfile: docker/Dockerfile-repo-db
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "1234"
+            MYSQL_USER: "testSimas"
+            MYSQL_PASSWORD: "Password@12"
+            MYSQL_ROOT_HOST: "%"
+        hostname: docker-db
+        networks:
+            - db-to-jenkins
+            - db-to-report-generator
+
+    data-retriever:
+        container_name: docker_data_retriever
+        build:
+            context: jenkins-api-connector
+            dockerfile: docker/Dockerfile-jenkins-api-connector
+        depends_on:
+            - "repo-db"
+        environment:
+            JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n"
+        ports:
+            - "8000:8000"
+        networks:
+            - db-to-jenkins
+
+    front-end:
+        container_name: docker_front_end
+        build:
+            context: .
+            dockerfile: user-interaction/docker/Dockerfile-user-interaction
+        depends_on:
+            - "repo-db"
+        ports:
+            - "8080:8080"
+            - "8002:8002"
+            - "8004:8004"
+        networks:
+            - db-to-report-generator
+
+networks:
+    db-to-jenkins:
+        driver: bridge
+    db-to-report-generator:
+        driver: bridge

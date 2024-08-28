@@ -1,0 +1,32 @@
+### Multistage Build Script for User Interaction ###
+
+## Build Report Generator
+FROM maven:3.6.3-openjdk-8 AS build-report
+
+COPY report-generator/src /usr/src/app/src
+COPY report-generator/pom.xml /usr/src/app
+
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+
+## Build User Front End
+FROM maven:3.6.3-openjdk-8 AS build-user
+
+COPY user-interaction/src /usr/src/app/src
+COPY user-interaction/pom.xml /usr/src/app
+
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+
+## Run both jar files
+FROM openjdk:8u265-jre AS run
+
+COPY --from=build-report /usr/src/app/target/report-generator-1.0-SNAPSHOT.jar /usr/app/report-generator-1.0-SNAPSHOT.jar
+COPY --from=build-user /usr/src/app/target/user-interaction-1.0-SNAPSHOT.jar /usr/app/user-interaction-1.0-SNAPSHOT.jar
+
+ADD user-interaction/scripts/start-2-jars.sh /usr/src/start-2-jars.sh
+
+EXPOSE 8080
+
+# ENTRYPOINT ["java", "-jar", "/usr/app/user-interaction-1.0-SNAPSHOT.jar"]
+CMD ["sh", "/usr/src/start-2-jars.sh"]

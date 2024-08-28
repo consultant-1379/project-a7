@@ -1,0 +1,17 @@
+### Multistage Build Script for Jenkins Interaction ###
+
+## Build Jenkins API Connector
+FROM maven:3.6.3-openjdk-8 AS build
+
+COPY src /usr/src/app/src
+COPY pom.xml /usr/src/app
+
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+
+## Run Jenkins API Connector Jar File
+FROM openjdk:8u265-jre AS run
+
+COPY --from=build /usr/src/app/target/jenkins-api-connector-1.0-SNAPSHOT.jar /usr/app/jenkins-api-connector-1.0-SNAPSHOT.jar
+
+ENTRYPOINT ["java", "-jar", "/usr/app/jenkins-api-connector-1.0-SNAPSHOT.jar"]

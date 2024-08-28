@@ -1,0 +1,6 @@
+### Build Script for Docker Database ###
+
+FROM mysql:latest AS setup
+
+ADD res/db-dumps/*.sql /docker-entrypoint-initdb.d/dump.sql
+ADD res/my-config.cnf /etc/mysql/conf.d/mysql.cnf
